@@ -11,3 +11,6 @@ env/
 
 # OS
 .DS_Store
+
+# Tests
+.pytest_cache/
