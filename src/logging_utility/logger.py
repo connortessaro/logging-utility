@@ -3,6 +3,7 @@ import inspect
 from logging_utility.log_type import LogType
 from datetime import datetime
 
+
 class Logger:
     def __init__(self, name):
         self.name = name
@@ -24,10 +25,10 @@ class Logger:
             "timestamp": now,
             "file_name": file_name,
             "function_name": function_name,
-            "line_number": line_number
+            "line_number": line_number,
         }
         res: str = json.dumps(log)
-        
-        with open(f"{self.name}.log", 'a') as file:
+
+        with open(f"{self.name}.log", "a") as file:
             file.write(f"{res} \n")
         return json.loads(res)
