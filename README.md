@@ -128,20 +128,6 @@ All file operations occur in temporary directories and leave no persistent artif
 
 ---
 
-## Non-goals
-
-This project intentionally does not attempt to replicate the full functionality of Python’s built-in logging module.
-
-It does not include:
-
-* asynchronous logging
-* performance optimization
-* production-grade handlers or formatters
-
-The focus is correctness, clarity, and understanding.
-
----
-
 ## Planned Improvements
 
 * Log filtering and aggregation utilities
