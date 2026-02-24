@@ -1,42 +1,59 @@
-# Logging Utility
+# 🪵 Logging Utility
 
-A minimal Python logging system built from scratch to explore how real-world logging frameworks capture execution context, structure log data, and safely persist side effects to disk.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/tested%20with-pytest-0A9EDC?logo=pytest&logoColor=white" alt="pytest">
+  <img src="https://img.shields.io/badge/logs-JSON-orange" alt="JSON logs">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License">
+</p>
 
-Rather than relying on Python’s built-in logging module, this project focuses on understanding logging at a lower level: how log records are constructed, how runtime metadata is discovered, and how filesystem behavior can be tested deterministically.
-
----
-
-## Why this project exists
-
-Most developers interact with logging systems as black boxes.
-This project was built to break that abstraction and understand:
-
-* how execution context (file, function, line number) is captured at runtime
-* why structured logs are preferred over plain text
-* how side effects like file creation can be tested safely
-* how logging responsibilities can be cleanly separated
-
-The goal is not to replace existing logging libraries, but to understand how they work internally.
+<p align="center">
+  A minimal Python logging system built from scratch to explore how real-world logging frameworks capture execution context, structure log data, and safely persist side effects to disk.
+</p>
 
 ---
 
-## Features
+## 📋 Table of Contents
 
-* Structured JSON logging (one log entry per line)
-* Enum-based log levels
-* Automatic runtime metadata capture:
-
-  * source file
-  * function name
-  * line number
-  * timestamp
-* File-based persistence to `.log` files
-* Fully tested with pytest
-* Isolated filesystem testing using temporary directories
+- [Why this project exists](#why-this-project-exists)
+- [Features](#features)
+- [Example Usage](#example-usage)
+- [Project Structure](#project-structure)
+- [Architecture Overview](#architecture-overview)
+- [Testing Strategy](#testing-strategy)
+- [Key Design Decisions](#key-design-decisions)
+- [Planned Improvements](#planned-improvements)
+- [Tech Stack](#tech-stack)
+- [What I learned](#what-i-learned)
 
 ---
 
-## Example Usage
+## 💡 Why this project exists
+
+Most developers interact with logging systems as black boxes. This project was built to break that abstraction and understand:
+
+- 🔍 how execution context (file, function, line number) is captured at runtime
+- 📐 why structured logs are preferred over plain text
+- 🧪 how side effects like file creation can be tested safely
+- 🧩 how logging responsibilities can be cleanly separated
+
+> The goal is not to replace existing logging libraries, but to understand how they work internally.
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 📄 Structured JSON logging | One log entry per line (newline-delimited JSON) |
+| 🏷️ Enum-based log levels | Clean, type-safe severity levels via `LogType` |
+| 🔎 Runtime metadata capture | Automatically records file, function, line number, and timestamp |
+| 💾 File-based persistence | Writes logs to `.log` files |
+| ✅ Fully tested | Pytest suite with isolated filesystem tests using `tmp_path` |
+
+---
+
+## 🚀 Example Usage
 
 ```python
 from logging_utility.logger import Logger
@@ -65,7 +82,7 @@ Each entry is written as a single JSON object per line to `app.log`, mirroring f
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 logging-utility/
@@ -82,7 +99,7 @@ logging-utility/
 
 ---
 
-## Architecture Overview
+## 🏗️ Architecture Overview
 
 ```
 Logger
@@ -98,16 +115,16 @@ Responsibilities are intentionally separated to keep logging logic readable, tes
 
 ---
 
-## Testing Strategy
+## 🧪 Testing Strategy
 
 All tests are written using **pytest** and focus on externally observable behavior rather than implementation details.
 
 Tests verify:
 
-* returned structured log data
-* creation of `.log` files
-* presence of runtime metadata
-* isolation of filesystem side effects using `tmp_path`
+- ✅ returned structured log data
+- ✅ creation of `.log` files
+- ✅ presence of runtime metadata
+- ✅ isolation of filesystem side effects using `tmp_path`
 
 Run tests from the project root:
 
@@ -119,37 +136,39 @@ All file operations occur in temporary directories and leave no persistent artif
 
 ---
 
-## Key Design Decisions
+## 🔑 Key Design Decisions
 
-* Runtime metadata is captured at log-call time using Python introspection to reflect the true execution context
-* Logs are written as newline-delimited JSON to support downstream parsing and filtering
-* Filesystem interactions are isolated during testing to ensure deterministic behavior
-* Tests assert outcomes rather than internal state to allow refactoring without breaking test coverage
-
----
-
-## Planned Improvements
-
-* Log filtering and aggregation utilities
-* Configurable output targets (file vs console)
-* Log rotation support
-* Custom formatter support
-* CLI tool for querying structured log files
+- **Runtime introspection** — metadata is captured at log-call time to reflect the true execution context
+- **Newline-delimited JSON** — supports downstream parsing and filtering
+- **Isolated filesystem tests** — deterministic behavior with no real file I/O during testing
+- **Outcome-based assertions** — tests assert observable results, allowing safe internal refactoring
 
 ---
 
-## Tech Stack
+## 🗺️ Planned Improvements
 
-* Python
-* pytest
-* inspect (runtime introspection)
-* pathlib (filesystem interaction)
+- [ ] Log filtering and aggregation utilities
+- [ ] Configurable output targets (file vs console)
+- [ ] Log rotation support
+- [ ] Custom formatter support
+- [ ] CLI tool for querying structured log files
 
 ---
 
-## What I learned
+## 🛠️ Tech Stack
 
-* how logging frameworks capture execution context at runtime
-* why structured logs scale better than plain-text output
-* how to test side effects without touching real files
-* how separation of concerns simplifies debugging and extensibility
+| Tool | Purpose |
+|---|---|
+| **Python** | Core language |
+| **pytest** | Test framework |
+| **inspect** | Runtime introspection |
+| **pathlib** | Filesystem interaction |
+
+---
+
+## 📚 What I learned
+
+- How logging frameworks capture execution context at runtime
+- Why structured logs scale better than plain-text output
+- How to test side effects without touching real files
+- How separation of concerns simplifies debugging and extensibility
